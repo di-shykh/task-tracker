@@ -1,11 +1,13 @@
 <template>
-  <div class="container-fluid ">
-    <div class="row col-12 justify-content-center">
-      <h3>Your settings:</h3>
-      <div class="w-100"></div>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-auto">
+        <h3>Your settings:</h3>
+        <div class="w-100"></div>
+      </div>
     </div>
-    <div class="row col-12 justify-content-center">
-      <form v-on:submit.prevent>
+    <div class="row justify-content-center">
+      <form v-on:submit.prevent class="col-12 col-md-auto">
         <div class="form-group">
           <label for="sidebarColor">Select background color for sidebar</label>
           <input
@@ -61,7 +63,7 @@
             @change="changeTasksBgColor()"
           />
         </div>
-        <div class="form-buttons">
+        <div class="row justify-content-center">
           <button
             type="submit"
             class="btn btn-success"
@@ -146,12 +148,8 @@ export default {
 form {
   padding: 20px;
 }
-.form-buttons {
-  display: flex;
-  justify-content: center;
-  button {
-    margin: 5px;
-  }
+button {
+  margin: 5px;
 }
 h3 {
   padding-top: 20px;

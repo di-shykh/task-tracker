@@ -105,4 +105,14 @@ nav {
     color: #1b84f0;
   }
 }
+/*не работает*/
+@media (max-width: 500px) {
+  a {
+    font-size: 0.9em;
+  }
+  header {
+    font-size: 1.1em;
+    /*background-color: #ffffff; а вот это почему-то работает*/
+  }
+}
 </style>

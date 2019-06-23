@@ -31,17 +31,17 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="less" scoped>
 .header-completed {
   display: flex;
   justify-content: flex-start;
   padding: 20px;
-}
-.header-completed p {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-.header-completed > p > span {
-  color: grey;
+  p {
+    font-size: 1.2em;
+    font-weight: bold;
+    > span {
+      color: grey;
+    }
+  }
 }
 </style>

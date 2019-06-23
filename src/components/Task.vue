@@ -1,9 +1,6 @@
 <template>
   <div class="task" :style="tasksBgColor">
-    <div
-      class="right-icons-block row justify-content-end"
-      @click="isDropDownShown = false"
-    >
+    <div class="right-icons-block" @click="isDropDownShown = false">
       <div v-if="!task.completed">
         <span v-show="!isTaskPriorityIsMedium">
           <i class="material-icons">{{ priorityIcon }}</i>
@@ -21,19 +18,20 @@
         </span>
       </div>
     </div>
-    <div class="block">
-      <div class="icon">
-        <p :style="{ background: task.color }">
-          {{ task.title.charAt(0).toUpperCase() }}
-        </p>
-      </div>
-      <div class="wrapper">
-        <div class="task-header">{{ task.title }}</div>
-        <div class="descr">
-          {{ task.description }}
+    <div class="block-full-width">
+      <div class="block">
+        <div class="icon">
+          <p :style="{ background: task.color }">
+            {{ task.title.charAt(0).toUpperCase() }}
+          </p>
+        </div>
+        <div class="wrapper">
+          <div class="task-header">{{ task.title }}</div>
+          <div class="descr">
+            {{ task.description }}
+          </div>
         </div>
       </div>
-
       <div class="dropdown">
         <!--работает но криво-->
         <div
@@ -265,7 +263,14 @@ export default {
   background: white;
   padding: 20px;
   border: 1px solid lightgrey;
+  display: flex;
+  flex-direction: column;
   .block {
+    display: flex;
+    align-items: center;
+    width: 98%;
+  }
+  .dropdown {
     display: flex;
     align-items: center;
   }
@@ -285,6 +290,12 @@ export default {
       text-align: center;
     }
   }
+  .block-full-width {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-around;
+  }
   .wrapper {
     margin: 0 20px;
   }
@@ -299,6 +310,9 @@ export default {
   }
   .right-icons-block {
     padding-right: 1em;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
   }
   .completed {
     color: lightgreen;
@@ -345,5 +359,13 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+@media (max-width: 500px) {
+  .icon > p {
+    font-size: 1em;
+  }
+  .descr {
+    font-size: 0.9em;
+  }
 }
 </style>

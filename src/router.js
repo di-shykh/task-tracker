@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./components/Home.vue";
+//import Home from "./components/Home.vue";
 import Auth from "./components/Auth.vue";
 import Tracker from "./components/Tracker.vue";
 import Settings from "./components/Settings.vue";
@@ -10,7 +10,8 @@ import auth from "./auth";
 Vue.use(Router);
 
 const routes = [
-  { path: "", name: "home", component: Home },
+  //{ path: "", name: "home", component: Home },
+  { path: "", name: "auth", component: Auth, meta: { guestOnly: true } },
   { path: "/auth", name: "auth", component: Auth, meta: { guestOnly: true } },
   {
     path: "/tracker",
@@ -31,7 +32,8 @@ const routes = [
     ]
   },
 
-  { path: "*", redirect: "/home" }
+  { path: "*", redirect: "/auth" }
+  //{ path: "*", redirect: "home" }
 ];
 
 export const router = new Router({

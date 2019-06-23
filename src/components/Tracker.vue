@@ -84,7 +84,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="less" scoped>
 .body {
   display: flex;
   width: 100%;
