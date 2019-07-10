@@ -1,41 +1,27 @@
 <template>
   <div class="container-fluid tasks">
-    <div class="todo">
+    <div class="todo" @dragover.prevent @drop.stop.prevent="drop($event)">
       <app-header-to-do :numToDo="toDoTasks.length" />
-      <div
-        class="containerForDragElements"
-        @dragover.prevent
-        @drop.prevent="drop($event)"
-      >
+      <div class="containerForDragElements">
         <transition-group name="list" tag="div">
           <app-task
             class="task"
             v-for="task in toDoTasks"
             :taskObj="task"
             :key="task.key"
-            draggable="true"
-            @dragstart="dragstart($event, task.key)"
-            @drag="drag($event)"
           />
         </transition-group>
       </div>
     </div>
-    <div class="completed">
+    <div class="completed" @dragover.prevent @drop.stop.prevent="drop($event)">
       <app-header-completed :numCompleted="completedTasks.length" />
-      <div
-        class="containerForDragElements"
-        @dragover.prevent
-        @drop.prevent="drop($event)"
-      >
+      <div class="containerForDragElements">
         <transition-group name="list" tag="div" class="flex">
           <app-task
-            class="task"
+            class="task-completed"
             v-for="task in completedTasks"
             :taskObj="task"
             :key="task.key"
-            draggable="true"
-            @dragstart="dragstart($event, task.key)"
-            @drag="drag($event)"
           />
         </transition-group>
       </div>
@@ -77,6 +63,9 @@ export default {
     },
     viewList() {
       return this.$store.getters["tasks/viewList"];
+    },
+    dragKey() {
+      return this.$store.getters["tasks/dragKey"];
     }
   },
   created() {
@@ -150,12 +139,20 @@ export default {
     }
   },
   methods: {
-    dragstart(event, key) {
-      event.dataTransfer.setData("text", key);
-    },
     drop(event) {
-      const key = event.dataTranfer.getData("text");
-      console.log(key); //пустой объект
+      const task = this.tasks.find(item => item.key == this.dragKey);
+      if (!task.task.completed && event.target.closest(".completed")) {
+        this.changeTaskStatus(task);
+      } else if (task.task.completed && event.target.closest(".todo"))
+        this.changeTaskStatus(task);
+    },
+    changeTaskStatus(task) {
+      task.task.completed = !task.task.completed;
+      const data = {
+        key: task.key,
+        completed: task.task.completed
+      };
+      this.$store.dispatch("tasks/changeTaskStatus", data);
     }
   }
 };

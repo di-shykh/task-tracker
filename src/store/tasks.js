@@ -7,14 +7,16 @@ const state = {
   tasks: [],
   viewList: true,
   filter: "All Tasks",
-  sortDirection: "Desc"
+  sortDirection: "Desc",
+  dragKey: ""
 };
 
 const getters = {
   tasks: state => state.tasks,
   viewList: state => state.viewList,
   filter: state => state.filter,
-  sortDirection: state => state.sortDirection
+  sortDirection: state => state.sortDirection,
+  dragKey: state => state.dragKey
 };
 
 const mutations = {
@@ -29,10 +31,13 @@ const mutations = {
   },
   changeSortDirection: (state, data) => {
     state.sortDirection = data;
+  },
+  resetDragKey: state => {
+    state.dragKey = "";
+  },
+  setDragKey: (state, data) => {
+    state.dragKey = data;
   }
-  /*setNewTask: (state, task) => {
-    state.tasks.push(task);
-  }*/
 };
 
 const actions = {
@@ -108,6 +113,12 @@ const actions = {
   },
   changeViewOfTasks: ({ commit, state }) => {
     commit("changeViewOfTasks");
+  },
+  resetDragKey: ({ commit, state }) => {
+    commit("resetDragKey");
+  },
+  setDragKey: ({ commit, state }, data) => {
+    commit("setDragKey", data);
   }
 };
 

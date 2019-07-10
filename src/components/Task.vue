@@ -1,5 +1,10 @@
 <template>
-  <div class="task" :style="tasksBgColor">
+  <div
+    class="task"
+    :style="tasksBgColor"
+    draggable="true"
+    @dragstart="dragstart($event, id)"
+  >
     <div class="right-icons-block" @click="isDropDownShown = false">
       <div v-if="!task.completed">
         <span v-show="!isTaskPriorityIsMedium">
@@ -255,6 +260,10 @@ export default {
         completed: this.task.completed
       };
       this.$store.dispatch("tasks/changeTaskStatus", data);
+    },
+    dragstart(event, key) {
+      event.dataTransfer.setData("text/plain", null);
+      this.$store.dispatch("tasks/setDragKey", key);
     }
   }
 };
