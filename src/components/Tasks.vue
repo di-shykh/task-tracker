@@ -2,7 +2,11 @@
   <div class="container-fluid tasks">
     <div class="todo">
       <app-header-to-do :numToDo="toDoTasks.length" />
-      <div class="containerForDragElements">
+      <div
+        class="containerForDragElements"
+        @dragover.prevent
+        @drop.prevent="drop($event)"
+      >
         <transition-group name="list" tag="div">
           <app-task
             class="task"
@@ -30,6 +34,8 @@
             :taskObj="task"
             :key="task.key"
             draggable="true"
+            @dragstart="dragstart($event, task.key)"
+            @drag="drag($event)"
           />
         </transition-group>
       </div>

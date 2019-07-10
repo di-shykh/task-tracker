@@ -105,7 +105,6 @@ nav {
     color: #1b84f0;
   }
 }
-/*не работает*/
 @media (max-width: 500px) {
   nav {
     a {

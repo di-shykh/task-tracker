@@ -86,6 +86,7 @@
           </button>
         </div>
       </div> почему-то не работает-->
+
       <div class="dropdown">
         <!--работает но криво-->
         <transition name="fade">
